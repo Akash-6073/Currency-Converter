@@ -181,3 +181,23 @@
     background-color: rgba(76, 175, 80, 0.2); /* Light background */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
 }
+
+
+.input-container {
+    position: relative;
+    display: inline-block;
+    width: 90%;
+}
+
+.currency-symbol {
+    position: absolute;
+    left: 10px;  /* Adjust according to your design */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;  /* Adjust the size if necessary */
+    color: #000;  /* Change color if needed */
+}
+
+input[type="number"] {
+    padding-left: 30px;  /* Make room for the symbol */
+}
