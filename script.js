@@ -7,6 +7,10 @@ const fromCurr = document.querySelector('.from select')
 const fromTo = document.querySelector('.to select')
 const faws = document.querySelector('.faws')
 
+
+
+// using 
+// STEP 1 : Here dropdown as 2 selects, (from,to) so insert values of country list in options
 dropdowns.forEach(insrt=>{
     for(x in countryList){
         const newOption = document.createElement('option');
@@ -17,14 +21,14 @@ dropdowns.forEach(insrt=>{
             newOption.selected="INR"
         insrt.append(newOption);
     }
-    console.log(fromCurr.value)
+    // If you select any of the country, it will trigger to that partcular event and changes the flag
     insrt.addEventListener("change",function(evt){
         updateFlag(evt.target);
     });
     
     
 })
-
+// Update Flags
 function updateFlag(x){
     const currency = x.value;
     const CountryCode = countryList[currency];
@@ -34,6 +38,7 @@ function updateFlag(x){
 
 }
 
+// STEP 2 : When you click on button this will convert from one curr to another
 btn.addEventListener('click',calcTotal)
 
 function calcTotal(e){
@@ -46,18 +51,17 @@ function calcTotal(e){
     const from = (fromCurr.value).toLowerCase()
     const to = (fromTo.value).toLowerCase()
     const url = `${BASE_URL}/${from}.json`
+    // STEP 3 : Fetch the details from the url
     fetch(url)
     .then((res)=>res.json())
     .then((data)=>{
-        // const res = data.map((x)=>x.from);
-        // console.log(data[from][to])
-        // console.log(from,to)
         document.querySelector('.msg').innerText=`${currencySymbols[from.toUpperCase()]}${x.value}  = ${currencySymbols[to.toUpperCase()]}${(x.value*data[from][to]).toFixed(2)} `
     })
     .catch((error)=>document.querySelector('.msg').innerText=`Sorry, Ican't Convert convert from ${from.toUpperCase()} to ${to.toUpperCase()}`
 )
 }
 
+// STEP 4 : when you click on Fontawesome exchange icon, the countries will get swapped
 faws.addEventListener('click',function(e){
     e.preventDefault();
     const tempValue = fromCurr.value;
@@ -69,6 +73,7 @@ faws.addEventListener('click',function(e){
     btn.click();
 })
 
+// STEP 5 : On every Start of the page the values will get updated
 window.onload = ()=>{
     const x=document.querySelector("input");
     if(x.value==="" || x.value<0)
